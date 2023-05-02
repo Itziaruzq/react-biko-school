@@ -36,7 +36,7 @@ const comics = [
 export const Home = () => {
   const [filter, setFilter] = useState("");
   const filteredTitles = comics.filter((comics) =>
-    comics.title.includes(filter)
+    comics.title.toLowerCase().includes(filter.toLowerCase)
   );
 
   return (
@@ -56,7 +56,13 @@ export const Home = () => {
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
           />
-          <button className="clearButton">Limpiar búsqueda</button>
+          <button
+            className="clearButton"
+            type="button"
+            onClick={() => setFilter("")}
+          >
+            Limpiar búsqueda
+          </button>
         </div>
         {filteredTitles.map((comics) => (
           <div key={comics.id} className="comicCard">
